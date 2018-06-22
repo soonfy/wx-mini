@@ -1,6 +1,5 @@
 <template>
-  <div class="container" @click="clickHandle('test click', $event)">
-
+  <div class="container">
     <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <div class="userinfo-nickname">
@@ -8,18 +7,18 @@
       </div>
     </div>
 
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
+    <div>
+      <div class="title">
+        <label>测试用例</label>
+        <span>更多 ></span>
+      </div>
+      <div class="list">
+        <div v-for="(item,key) in list" :key="key" class="item">
+          <a :href="item.href">{{item.name}}</a>
+        </div>
       </div>
     </div>
 
-    <form class="form-container">
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
-    <a href="/pages/wx-f2/main" class="counter">去往wx-f2示例页面</a>
   </div>
 </template>
 
@@ -29,8 +28,26 @@ import card from '@/components/card'
 export default {
   data () {
     return {
-      motto: 'Hello World',
-      userInfo: {}
+      userInfo: {},
+      list: [{
+        name: 'vuex',
+        href: '/pages/vuex/main'
+      }, {
+        name: 'wx-f2',
+        href: '/pages/wx-f2/main'
+      }, {
+        name: 'echarts',
+        href: '/pages/echarts/main'
+      }, {
+        name: 'fly',
+        href: '/pages/fly/main'
+      }, {
+        name: 'dayjs',
+        href: '/pages/dayjs/main'
+      }, {
+        name: 'exchange',
+        href: '/pages/exchange/main'
+      }]
     }
   },
 
@@ -54,9 +71,6 @@ export default {
           })
         }
       })
-    },
-    clickHandle (msg, ev) {
-      console.log('clickHandle:', msg, ev)
     }
   },
 
@@ -68,10 +82,24 @@ export default {
 </script>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.container > div {
+  margin-bottom: 10px;
+}
+
 .userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 60px;
+  margin: 0 auto;
 }
 
 .userinfo-avatar {
@@ -86,21 +114,44 @@ export default {
 }
 
 .usermotto {
-  margin-top: 150px;
+  margin-top: 20px;
 }
 
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
+.title {
+  display: flex;
+  border-bottom: #eee 1px solid;
+  padding: 0 0 10px 0;
 }
 
-.counter {
+.title > label {
+  flex: 1;
+  margin: 0 0 0 10px;
+  padding: 0 0 0 4px;
+  border-left: #448ef6 2px solid;
+}
+
+.title > span {
   display: inline-block;
-  margin: 10px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
+  margin: 0 10px 0 0;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  margin: 0 10px;
+}
+
+.item {
+  width: 30%;
+  min-width: 70px;
+  height: 20px;
+  padding: 10px 0;
+}
+
+.item > a {
+  text-align: center;
+  border: #448ef6 1px solid;
+  border-radius: 6%;
 }
 </style>
